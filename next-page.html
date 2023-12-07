@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 타이틀</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px;
+            margin-top: 150px; /* 이미지를 아래로 내리는 마진 추가 */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #333;
+            border-radius: 3px;
+            overflow: hidden;
+            transition: filter 0.3s ease-in-out;
+            width: 400px; /* 이미지의 원하는 너비 설정 */
+            height: 400px; /* 이미지의 원하는 높이 설정 */
+            margin: 0px; /* 이미지 간격을 좁게 조절 */
+            cursor: pointer; /* 포인터 형태로 마우스 커서 변경 */
+        }
+
+        img:hover {
+            filter: brightness(40%);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>페이지 타이틀</h1>
+    </header>
+
+    <section>
+        <img src="face1.png" alt="이미지 1" onclick="selectImage('face1.png')">
+        <img src="face2.png" alt="이미지 2" onclick="selectImage('face2.png')">
+        <img src="face3.png" alt="이미지 3" onclick="selectImage('face3.png')">
+        <img src="face4.png" alt="이미지 4" onclick="selectImage('face4.png')">
+    </section>
+
+    <script>
+        function selectImage(selectedImage) {
+            // 이미지를 클릭하면 호출되는 함수
+            localStorage.setItem('selectedImage', selectedImage);
+            // 선택한 이미지를 로컬 스토리지에 저장
+            window.location.href = 'nnext-page.html';
+            // 다음 페이지로 이동
+        }
+    </script>
+</body>
+</html>

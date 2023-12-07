@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다음 페이지 타이틀</title>
+    <style>
+        body {
+            width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 50px;
+        }
+
+        h2 {
+            width: 100px;
+        }
+
+        .retry {
+            margin-top: 60px;
+            padding: 15px 50px 15px 50px;
+            font-size: 20px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 3px;
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        img {
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        #selectedImage {
+            width: 766px;
+        }
+
+        .text-container {
+            margin: 0;
+            flex-grow: ;
+        }
+
+        .montagu {
+            width: 770px;
+            height: 770px;
+            position: relative;
+            flex-grow: 2;
+        }
+
+        .eyes-container,
+        .noses-container,
+        .mouthes-container {}
+
+        .eyes-overlay,
+        .noses-overlay,
+        .mouthes-overlay {
+            width: 400px;
+            cursor: pointer;
+        }
+
+        .overlay-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 760px;
+            height: 760px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 추가된 부분 */
+        .eye-overlay {
+            top: 38%;
+            position: absolute;
+            width: 300px;
+            border: none;
+        }
+
+        .nose-overlay {
+            top: 55%;
+            position: absolute;
+            width: 150px;
+            border: none;
+        }
+
+        .mouth-overlay {
+            top: 65%;
+            position: absolute;
+            width: 150px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="next-page.html">
+        <h1>Back</h1>
+    </a>
+
+    <div class="content">
+
+        <div class="text-container">
+
+            <div class="eyes-container">
+                <h2>eyes</h2>
+                <div class="eyes-overlay" onclick="addImage(event)">
+                    <img src="eyes1.png">
+                    <img src="eyes2.png">
+                    <img src="eyes3.png">
+                    <img src="eyes4.png">
+                </div>
+            </div>
+
+            <div class="noses-container">
+                <h2>nose</h2>
+                <div class="noses-overlay" onclick="addImage(event)">
+                    <img src="nose1.png">
+                    <img src="nose2.png">
+                    <img src="nose3.png">
+                    <img src="nose4.png">
+                </div>
+            </div>
+
+            <div class="mouthes-container">
+                <h2>mouth</h2>
+                <div class="mouthes-overlay" onclick="addImage(event)">
+                    <img src="mouth1.png">
+                    <img src="mouth2.png">
+                    <img src="mouth3.png">
+                    <img src="mouth4.png">
+                </div>
+            </div>
+
+            <button class="retry" onclick="retryImages()">retry</button>
+
+        </div>
+
+        <div class="montagu">
+            <img src="" id="selectedImage" alt="얼굴">
+            <div class="overlay-image" id="overlayImage"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function addImage(event) {
+            if (event.target.tagName === 'IMG') {
+                const overlayImage = document.getElementById('overlayImage');
+                const clonedImage = event.target.cloneNode(true);
+
+                // 모든 클래스 초기화
+                clonedImage.className = '';
+
+                // 클릭된 이미지에 따라 다른 클래스 추가
+                if (event.currentTarget.classList.contains('eyes-overlay')) {
+                    clonedImage.classList.add('eye-overlay');
+                } else if (event.currentTarget.classList.contains('noses-overlay')) {
+                    clonedImage.classList.add('nose-overlay');
+                } else if (event.currentTarget.classList.contains('mouthes-overlay')) {
+                    clonedImage.classList.add('mouth-overlay');
+                }
+
+                // 기존 이미지 유지하고 새로운 이미지 추가
+                overlayImage.append(clonedImage);
+                localStorage.setItem('selectedImage', event.target.src);
+            }
+        }
+
+        function retryImages() {
+            const overlayImage = document.getElementById('overlayImage');
+            
+            // .overlay-image에 있는 모든 자식 제거
+            while (overlayImage.firstChild) {
+                overlayImage.removeChild(overlayImage.firstChild);
+            }
+
+            // localStorage 초기화
+            localStorage.removeItem('selectedImage');
+        }
+
+        const selectedImage = localStorage.getItem('selectedImage');
+        document.getElementById('selectedImage').src = selectedImage;
+    </script>
+</body>
+
+</html>

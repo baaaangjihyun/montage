@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Background</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* 스크롤 막기 */
+        }
+
+        #gif-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('back.gif') center/cover no-repeat; /* GIF 파일 경로로 변경 */
+            transition: all 0.3s ease-in-out; /* 크기 변화에 부드러운 효과를 위한 transition 설정 */
+        }
+
+        #white-rectangle {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 700px;
+            background-color: white;
+            overflow: auto; /* 스크롤이 가능하도록 overflow 속성 추가 */
+            display: flex;
+            flex-direction: column; /* 이미지와 텍스트를 세로로 배치하기 위해 추가 */
+            align-items: center;
+            padding: 20px; /* 위아래 여백을 조절하는 부분 */
+        }
+
+        #centered-image {
+            max-width: 100%;
+            max-height: calc(100% - 40px); /* 이미지의 최대 높이를 흰 사각형 높이에서 여백을 뺀 값으로 설정 */
+            margin-bottom: 20px; /* 이미지 아래에 여백 추가 */
+        }
+
+        #scroll-text {
+            text-align: center;
+            color: black;
+            transition: color 0.3s ease;
+            z-index: 1; /* 텍스트가 배경 위에 나타나도록 z-index 설정 */
+            margin-top: 400px;
+            
+        }
+
+        #scroll-text:hover {
+            color: grey;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="gif-container"></div>
+    <div id="white-rectangle">
+        <img id="centered-image" src="logo.png" alt="Centered Image">
+        <div id="scroll-text" onclick="redirectToOtherPage()">
+            <h1>Please enter your information</h1>
+        </div>
+    </div>
+
+    <script>
+        function redirectToOtherPage() {
+            // 다른 페이지로 이동하는 코드
+            window.location.href = "other-page.html"; // 이동할 페이지의 경로로 변경
+        }
+    </script>
+</body>
+</html>
